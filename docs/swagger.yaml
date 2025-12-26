@@ -1,0 +1,134 @@
+basePath: /
+definitions:
+  model.Todo:
+    properties:
+      completed:
+        type: boolean
+      id:
+        type: string
+      title:
+        type: string
+    type: object
+host: localhost:8080
+info:
+  contact: {}
+  description: API quản lý danh sách công việc (Todo List) đơn giản bằng Golang.
+  title: Todo List API
+  version: "1.0"
+paths:
+  /todos:
+    get:
+      description: Trả về danh sách tất cả các công việc hiện có
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/model.Todo'
+            type: array
+      summary: Lấy danh sách công việc
+      tags:
+      - todos
+    post:
+      consumes:
+      - application/json
+      description: Tạo một Todo với title và status mặc định
+      parameters:
+      - description: Dữ liệu Todo
+        in: body
+        name: todo
+        required: true
+        schema:
+          $ref: '#/definitions/model.Todo'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/model.Todo'
+        "400":
+          description: Invalid input
+          schema:
+            type: string
+      summary: Tạo công việc mới
+      tags:
+      - todos
+  /todos/{id}:
+    delete:
+      description: Xóa vĩnh viễn công việc dựa trên ID
+      parameters:
+      - description: Todo ID
+        in: path
+        name: id
+        required: true
+        type: string
+      responses:
+        "204":
+          description: No Content
+        "404":
+          description: Not Found
+          schema:
+            type: string
+      summary: Xóa công việc
+      tags:
+      - todos
+    get:
+      description: Lấy thông tin công việc dựa trên ID
+      parameters:
+      - description: Todo ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.Todo'
+        "404":
+          description: Not Found
+          schema:
+            type: string
+      summary: Lấy chi tiết công việc
+      tags:
+      - todos
+    put:
+      consumes:
+      - application/json
+      description: Cập nhật thông tin dựa trên ID
+      parameters:
+      - description: Todo ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Dữ liệu cập nhật
+        in: body
+        name: todo
+        required: true
+        schema:
+          $ref: '#/definitions/model.Todo'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.Todo'
+        "400":
+          description: Invalid input
+          schema:
+            type: string
+        "404":
+          description: Not Found
+          schema:
+            type: string
+      summary: Cập nhật công việc
+      tags:
+      - todos
+swagger: "2.0"
