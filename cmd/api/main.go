@@ -22,7 +22,7 @@ import (
 // @title Todo List API
 // @version 1.0
 // @description API quản lý danh sách công việc (Todo List) đơn giản bằng Golang.
-// @host localhost:8080
+// ////@host localhost:8080
 // @BasePath /
 func main() {
 	_ = godotenv.Load()

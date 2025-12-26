@@ -9,7 +9,6 @@ definitions:
       title:
         type: string
     type: object
-host: localhost:8080
 info:
   contact: {}
   description: API quản lý danh sách công việc (Todo List) đơn giản bằng Golang.
